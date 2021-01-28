@@ -1,24 +1,43 @@
 class Business {
-  constructor({ room, media, view }) {
+  constructor({ room, media, view, socketBuilder }) {
     this.room = room;
     this.media = media;
     this.view = view;
 
-    this.currentStrem = {};
+    this.socketBuilder = socketBuilder
+      .setOnUserConnected(this.onUserConnected())
+      .setOnUserDisconnected(this.onUserDisconnected())
+      .build();
+    this.socketBuilder.emit("join-room", this.room, "teste01");
+    this.currentStream = {};
   }
-
-  async _init() {
-    this.currentStrem = await this.media.getCamera();
-    this.addVideoStream("user01");
-  }
-
   static initialize(deps) {
     const instance = new Business(deps);
     return instance._init();
   }
-
-  addVideoStream(userId, stream = this.currentStrem) {
-    const isCurrentId = false;
-    this.view.renderVideo({ userId, stream, isCurrentId });
+  async _init() {
+    this.currentStream = await this.media.getCamera();
+    this.addVideoStream("test01");
   }
+
+  addVideoStream(userId, stream = this.currentStream) {
+    const isCurrentId = false;
+    this.view.renderVideo({
+      userId,
+      stream,
+      isCurrentId,
+    });
+  }
+
+  onUserConnected = function () {
+    return (userId) => {
+      console.log("user connected!", userId);
+    };
+  };
+
+  onUserDisconnected = function () {
+    return (userId) => {
+      console.log("user disconnected!", userId);
+    };
+  };
 }

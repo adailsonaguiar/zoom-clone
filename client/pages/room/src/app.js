@@ -25,11 +25,14 @@ const onload = () => {
   //   url: "https://media.giphy.com/media/fe0LtB0vOkl8lRskej/giphy.mp4",
   // });
 
+  const socketUrl = "http://localhost:3000";
+  const socketBuilder = new SocketBuilder({ socketUrl });
   const media = new Media();
   const deps = {
     view,
     media,
     room,
+    socketBuilder,
   };
 
   Business.initialize(deps);
