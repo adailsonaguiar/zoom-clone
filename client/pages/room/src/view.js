@@ -32,8 +32,18 @@ class View {
     videoGrid.append(div);
   }
 
-  renderVideo({ userId, stream = null, url = null, isCurrentId = false }) {
-    const video = this.createVideoElement({ src: url, srcObject: stream });
+  renderVideo({
+    userId,
+    stream = null,
+    url = null,
+    isCurrentId = false,
+    muted = true,
+  }) {
+    const video = this.createVideoElement({
+      src: url,
+      muted,
+      srcObject: stream,
+    });
     this.appendToHtmlTree(userId, video, isCurrentId);
   }
 }
