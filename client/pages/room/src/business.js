@@ -24,7 +24,7 @@ class Business {
     const isCurrentId = false;
     this.view.renderVideo({
       userId,
-      muted: false,
+      muted: true,
       stream,
       isCurrentId,
     });
