@@ -11,22 +11,11 @@ const onload = () => {
   const room = urlParams.get("room");
   console.log("this is the room", room);
 
-  // const recorderBtn = document.getElementById("record");
-  // recorderBtn.addEventListener("click", recordClick(recorderBtn));
-
-  const view = new View();
-  // view.renderVideo({
-  //   userId: "teste01",
-  //   url: "https://media.giphy.com/media/fe0LtB0vOkl8lRskej/giphy.mp4",
-  // });
-  // view.renderVideo({
-  //   userId: "teste01",
-  //   isCurrentId: true,
-  //   url: "https://media.giphy.com/media/fe0LtB0vOkl8lRskej/giphy.mp4",
-  // });
-
+  // const recorderBtn = document.getElementById('record')
+  // recorderBtn.addEventListener('click', recordClick(recorderBtn))
   const socketUrl = "http://localhost:3000";
   const socketBuilder = new SocketBuilder({ socketUrl });
+  const view = new View();
   const media = new Media();
   const deps = {
     view,
